@@ -1,12 +1,12 @@
 // Conditionally require the JSV module when on the server.
-Bones.JSV = Bones.server ? require('JSV').JSV : JSV;
+Graft.JSV = Graft.server ? require('JSV').JSV : JSV;
 
 /**
 * Schema model definition.
 *
 * This model that represents a JSON schema representation of data model.
 */
-model = Backbone.RelationalModel.extend({
+module.exports = this.model = Backbone.RelationalModel.extend({
     url: function() {
         return '/api/Schema/' + encodeURIComponent(this.get('id'));
     },
@@ -64,7 +64,7 @@ model = Backbone.RelationalModel.extend({
     * We memoize this to make sure we only set up one environment, and then re-use it.
     */
     env: _.memoize(function() {
-        var env = Bones.JSV.createEnvironment('json-schema-draft-03');
+        var env = Graft.JSV.createEnvironment('json-schema-draft-03');
         env.setOption('defaultSchemaURI', 'http://json-schema.org/hyper-schema#');
         env.setOption('latestJSONSchemaSchemaURI', 'http://json-schema.org/schema#');
         env.setOption('latestJSONSchemaHyperSchemaURI', 'http://json-schema.org/hyper-schema#');
