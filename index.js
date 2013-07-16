@@ -1,5 +1,3 @@
-var Backbone = require('backbone');
-require('backbone-relational');
+var Graft = require('graftjs');
 
-
-require('graftjs/server').load(__dirname);
+require('graftjs').load(__dirname);
