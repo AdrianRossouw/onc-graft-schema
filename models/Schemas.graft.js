@@ -1,8 +1,8 @@
 /**
  * Provides a list of all the possible schemas in the system.
  */
-module.exports = this.model = Backbone.Collection.extend({
-    model: models.Schema,
+module.exports = this.model = Graft.BaseCollection.extend({
+    model: Graft.$models.Schema,
     url: '/api/Schema'
 });
 

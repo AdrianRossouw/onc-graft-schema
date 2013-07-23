@@ -1,15 +1,12 @@
-// Conditionally require the JSV module when on the server.
-Graft.JSV = Graft.server ? require('JSV').JSV : JSV;
+Graft.JSV = require('JSV').JSV;
 
 /**
 * Schema model definition.
 *
 * This model that represents a JSON schema representation of data model.
 */
-module.exports = this.model = Backbone.RelationalModel.extend({
-    url: function() {
-        return '/api/Schema/' + encodeURIComponent(this.get('id'));
-    },
+module.exports = this.model = Graft.BaseModel.extend({
+    urlRoot: '/api/Schema',
     defaults: {
         type: 'object',
         properties: {}
@@ -32,7 +29,7 @@ module.exports = this.model = Backbone.RelationalModel.extend({
      * so it can be checked asynchronously.
      */
     loadSchema: function() {
-        var defer = jQuery.Deferred();
+        var defer = $.Deferred();
 
         // We resolveWith and rejectWith here so that the events will always
         // be bound with the schema model set.
@@ -41,7 +38,7 @@ module.exports = this.model = Backbone.RelationalModel.extend({
         }, this);
 
         var failFn = _.bind(function(m) {
-            defer.rejectWith(this, ["Could not load the schema"]);
+            defer.rejectWith(this, _(arguments).toArray());
         }, this);
 
         this.fetch().done(doneFn).fail(failFn);
