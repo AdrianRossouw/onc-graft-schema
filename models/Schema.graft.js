@@ -19,8 +19,8 @@ module.exports = this.model = Graft.BaseModel.extend({
      * deferred call.
      */
     isLoaded: function() {
-        return $.when(this.$schema)
-            .pipe(_.f.functionize(this));
+        return _.when(this.$schema)
+            .then(_.f.functionize(this));
     },
     /**
      * Load the schema into the JSV environment.
@@ -29,7 +29,7 @@ module.exports = this.model = Graft.BaseModel.extend({
      * so it can be checked asynchronously.
      */
     loadSchema: function() {
-        var defer = $.Deferred();
+        var defer = _.Deferred();
 
         // We resolveWith and rejectWith here so that the events will always
         // be bound with the schema model set.
@@ -50,8 +50,9 @@ module.exports = this.model = Graft.BaseModel.extend({
     *
      */
     validateModel: function(model) {
-        return $.when(this.$schema).pipe(function(schema) {
+        return $.when(this.$schema).then(function(schema) {
             var report = schema.validate(model.toJSON());
+            console.log(model.toJSON());
             return report.errors;
         });
     },

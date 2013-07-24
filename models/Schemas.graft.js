@@ -9,6 +9,6 @@ module.exports = this.model = Graft.BaseCollection.extend({
 this.model.augment({
     fetch: function(parent, options) {
         return ($.when(parent.apply(this, [options]))
-            .pipe(_.f.functionize(this)));
+            .then(_.f.functionize(this)));
     }
 });

@@ -4,7 +4,7 @@
     "type": "object",
     "properties": {
         "name": { "type": "string" },
-        "group": { "type": "string", "required": true },
+        "group": { "type": "integer", "required": true, "minLength": 1 },
         "status": { "type": "string", "enum": ["offline", "online"]}
     }
 }
