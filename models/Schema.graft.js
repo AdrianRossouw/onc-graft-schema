@@ -52,7 +52,6 @@ module.exports = this.model = Graft.BaseModel.extend({
     validateModel: function(model) {
         return $.when(this.$schema).then(function(schema) {
             var report = schema.validate(model.toJSON());
-            console.log(model.toJSON());
             return report.errors;
         });
     },
