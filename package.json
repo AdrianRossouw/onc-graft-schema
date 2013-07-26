@@ -37,6 +37,7 @@
     "backbone.marionette": "~1.0.4",
     "graft-mockdb": "git+ssh://git@github.com:ONCHoldings/graft-mockdb.git#master",
     "grunt-contrib-jshint": "~0.6.0",
+    "backbone.wreqr": "git+ssh://git@github.com:marionettejs/backbone.wreqr.git#master",
     "grunt": "~0.4.1"
   }
 }
