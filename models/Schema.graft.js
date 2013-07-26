@@ -34,7 +34,8 @@ module.exports = this.model = Graft.BaseModel.extend({
         // We resolveWith and rejectWith here so that the events will always
         // be bound with the schema model set.
         var doneFn = _.bind(function(m) {
-            defer.resolveWith(this, [this.env().createSchema(m, undefined, 'urn:' + this.get('id'))]);
+            // defer.resolveWith(this, [this.env().createSchema(m, undefined, 'urn:' + this.get('id'))]);
+            defer.resolveWith(this, [this.env().createSchema(m.toJSON())]);
         }, this);
 
         var failFn = _.bind(function(m) {

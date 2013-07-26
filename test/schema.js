@@ -74,10 +74,10 @@ describe('Schema Validation', function() {
             this.schema.validateModel(this.instance)
                 .then(function(result) { result.should.have.length(0); done(); }, done);
         });
-        it.skip('will trigger an error', function(done) {
+        it('will trigger an error', function(done) {
             this.instance.unset('group'); // required field;
             this.schema.validateModel(this.instance)
-                .then(function(result) { console.log(result); result.should.have.length(1); done(); }, done);
+                .then(function(result) { result.should.have.length(1); done(); }, done);
         });
     });
 });
