@@ -33,13 +33,13 @@ describe('Schema Validation', function() {
         before(function() {
             this.schema = new Graft.$models.Schema({id: 'Account'});
         });
-        it('Should have created Graft.JSV', function() {
-            Graft.should.have.property('JSV');
+        it('Should have created Graft.tv4', function() {
+            Graft.should.have.property('tv4');
         });
-        it('Should have working JSV.env()', function() {
+        it('Should have working tv4.env()', function() {
             var env = Graft.$models.Schema.prototype.env();
 
-            var report = env.validate({ a : 1 }, {
+            var report = env.validateMultiple({ a : 1 }, {
                 type : 'object',
                 properties : { a : { type : 'string' }}
             });
@@ -68,7 +68,7 @@ describe('Schema Validation', function() {
                 group: 'default'
             });
 
-            _.when(this.schema.isLoaded).then(function() {done();});
+            _.when(this.schema.isLoaded()).then(function() {done();});
         });
         it('will validate a model', function(done) {
             this.schema.validateModel(this.instance)

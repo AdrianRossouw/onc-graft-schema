@@ -1,5 +1,5 @@
 var Graft = require('graftjs/server');
 
-Graft.bundle('vendor', 'JSV');
+Graft.bundle('vendor', 'tv4');
 
 Graft.load(__dirname);

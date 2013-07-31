@@ -1,4 +1,4 @@
-Graft.JSV = require('JSV').JSV;
+Graft.tv4 = require('tv4').tv4;
 
 /**
 * Schema model definition.
@@ -23,7 +23,7 @@ module.exports = this.model = Graft.BaseModel.extend({
             .then(_.f.functionize(this));
     },
     /**
-     * Load the schema into the JSV environment.
+     * Load the schema into the tv4 environment.
      *
      * This triggers a fetch, so we wrap it in a promise
      * so it can be checked asynchronously.
@@ -34,7 +34,9 @@ module.exports = this.model = Graft.BaseModel.extend({
         // We resolveWith and rejectWith here so that the events will always
         // be bound with the schema model set.
         var doneFn = _.bind(function(m) {
-            defer.resolveWith(this, [this.env().createSchema(m.toJSON())]);
+            var env = this.env();
+            env.addSchema(m.id, m.toJSON());
+            defer.resolveWith(this, [env.getSchema(m.id)]);
         }, this);
 
         var failFn = _.bind(function(m) {
@@ -51,21 +53,17 @@ module.exports = this.model = Graft.BaseModel.extend({
      */
     validateModel: function(model) {
         return $.when(this.$schema).then(function(schema) {
-            var report = schema.validate(model.toJSON());
+            var report = this.env().validateMultiple(model.toJSON(), schema);
             return report.errors;
         });
     },
     /**
-    * JSV validation environment.
+    * tv4 validation environment.
     *
     * We memoize this to make sure we only set up one environment, and then re-use it.
     */
     env: _.memoize(function() {
-        var env = Graft.JSV.createEnvironment('json-schema-draft-03');
-        env.setOption('defaultSchemaURI', 'http://json-schema.org/hyper-schema#');
-        env.setOption('latestJSONSchemaSchemaURI', 'http://json-schema.org/schema#');
-        env.setOption('latestJSONSchemaHyperSchemaURI', 'http://json-schema.org/hyper-schema#');
-        env.setOption('latestJSONSchemaLinksURI', 'http://json-schema.org/links#');
+        var env = Graft.tv4.freshApi();
         return env;
     })
 });
