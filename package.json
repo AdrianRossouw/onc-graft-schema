@@ -2,7 +2,7 @@
   "name": "graft-schema",
   "version": "0.0.1",
   "description": "schema model for graft.js",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha -R spec"
   },
