@@ -14,10 +14,10 @@ Graft.BaseModel = TestBaseModel;
 
 Graft.on('test:setup', function(port) {
     // A simple test data adaptor to debug the REST api.
-    var Mock = require('graft-mockdb');
+    var Mock = require('graft-mockdb/server');
 
     Mock.testData.Schema = [];
-    Mock.testData.Schema.push(require('./fixture/resources/Schema.Account.json'));
+    Mock.testData.Schema.push(require('./fixture/schemas/account.json'));
 
     Graft.load(__dirname + '/../');
     Graft.load(__dirname + '/fixture/');
